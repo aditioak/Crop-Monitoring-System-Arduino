@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+  </head>
+  <body
+    style="
+      background-image: linear-gradient(to right, #00ced1 , #90ee90);
+      font-weight: bold;"
+  >
+    <div id="root">
+      <div style="font-size: 2.5rem; padding-left: 30%; padding-top: 1rem">
+        CROP MONITORING SYSTEM
+      </div>
+      <div
+        style="
+          font-size: 1.8rem;
+          padding-left: 40%;
+          padding-top: 2rem;
+          padding-bottom: 3rem;
+        "
+      >
+        Real Time Sensor Data
+      </div>
+      <div class="float-container">
+        <div
+          class="float-child"
+          style="width: 10%; float: left; font-size: 1.2rem"
+        >
+          Timestamp
+        </div>
+        <div
+          class="float-child"
+          style="width: 18%; float: left; font-size: 1.2rem"
+        >
+          Humidity
+        </div>
+        <div
+          class="float-child"
+          style="width: 18%; float: left; font-size: 1.2rem"
+        >
+          Temperature
+        </div>
+        <div
+          class="float-child"
+          style="width: 18%; float: left; font-size: 1.2rem"
+        >
+          Heat Index
+        </div>
+        <div
+          class="float-child"
+          style="width: 18%; float: left; font-size: 1.2rem"
+        >
+          Photodiode
+        </div>
+        <div
+          class="float-child"
+          style="width: 18%; float: left; font-size: 1.2rem"
+        >
+          Soil Moisture
+        </div>
+      </div>
+      <div style="height: 1.6rem"></div>
+      <div class="float-container">
+        <div
+          id="time"
+          class="float-child"
+          style="width: 10%; float: left"
+        ></div>
+        <div
+          id="humidity"
+          class="float-child"
+          style="width: 18%; float: left"
+        ></div>
+        <div
+          id="temp"
+          class="float-child"
+          style="width: 18%; float: left"
+        ></div>
+        <div
+          id="heat"
+          class="float-child"
+          style="width: 18%; float: left"
+        ></div>
+        <div
+          id="photo"
+          class="float-child"
+          style="width: 18%; float: left"
+        ></div>
+        <div
+          id="soil"
+          class="float-child"
+          style="width: 18%; float: left"
+        ></div>
+      </div>
+    </div>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyDC5AZSHQJM3YDaV6VOodzTRgvnQmcY9_A",
+  authDomain: "plantmonitoringsystem-da869.firebaseapp.com",
+  databaseURL: "https://plantmonitoringsystem-da869-default-rtdb.firebaseio.com",
+  projectId: "plantmonitoringsystem-da869",
+  storageBucket: "plantmonitoringsystem-da869.appspot.com",
+  messagingSenderId: "668705677260",
+  appId: "1:668705677260:web:42ab4af44ace369a7b0769",
+  measurementId: "G-7CYNHMYCTK"
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      var firebaseRef = firebase.database().ref().child("LiveOutput");
+      firebaseRef.on("value", function (snapshot) {
+        snapshot.forEach(function (element) {
+         
+
+          var myEle0 = document.getElementById("time");
+          if (myEle0) {
+            var today = new Date();
+            var time =
+              today.getHours() +
+              ":" +
+              today.getMinutes() +
+              ":" +
+              today.getSeconds();
+            document.getElementById("time").innerHTML = time;
+          }
+
+          var myEle1 = document.getElementById("humidity");
+          if (myEle1) {
+            var myEle0 = document.getElementById("time");
+          if (myEle0) {
+            var today = new Date();
+            var time =
+              today.getHours() +
+              ":" +
+              today.getMinutes() +
+              ":" +
+              today.getSeconds();
+            document.getElementById("time").innerHTML = time;
+          }
+            document.querySelector("#humidity").innerHTML += `
+          <div>
+            Humidity in % is:
+            ${element.val()[0]}
+            ${element.val()[1]}
+            ${element.val()[2]}
+            ${element.val()[3]}
+            ${element.val()[4]}
+            </div>
+          `;
+          }
+
+          var myEle2 = document.getElementById("temp");
+          if (myEle2) {
+            document.querySelector("#temp").innerHTML += `
+          <div>
+            Temperature in °C is:
+            ${element.val()[6]}
+            ${element.val()[7]}
+            ${element.val()[8]}
+            ${element.val()[9]}
+            ${element.val()[10]}
+            </div>
+          `;
+          }
+
+          var myEle3 = document.getElementById("heat");
+          if (myEle3) {
+            document.querySelector("#heat").innerHTML += `
+          <div>
+            Heat Index in °C is:
+            ${element.val()[18]}
+            ${element.val()[19]}
+            ${element.val()[20]}
+            ${element.val()[21]}
+            ${element.val()[22]}
+            </div>
+          `;
+          }
+
+          var myEle4 = document.getElementById("photo");
+          if (myEle4) {
+            document.querySelector("#photo").innerHTML += `
+          <div>
+            Photodiode value in % is:
+            ${element.val()[30]}
+            ${element.val()[31]}
+            ${element.val()[32]}
+            ${element.val()[33]}
+            ${element.val()[34]}
+            </div>
+          `;
+          }
+
+          var myEle5 = document.getElementById("soil");
+          if (myEle5) {
+            document.querySelector("#soil").innerHTML += `
+          <div>
+            Soil moisture in % is:
+            ${element.val()[36]}
+            ${element.val()[37]}
+            ${element.val()[38]}
+            ${element.val()[39]}
+            ${element.val()[40]}
+            </div>
+          `;
+          }
+
+          // var divs = $("div");
+
+          // divs.each(function (index, value) {
+          //   var id = $(value).attr("id");
+
+          //   if (id == "humidity") {
+          //     document.querySelector("#humidity").innerHTML += `
+          // <div>
+          //   ${element.key}
+          //   ${element.val()[0]}
+          //   ${element.val()[1]}
+          //   ${element.val()[2]}
+          //   ${element.val()[3]}
+          //   ${element.val()[4]}
+          //   </div>
+          // `;
+          //   } else if (id == "bar") {
+          //     // Do bar work
+          //   }
+          // });
+
+          // if ($("div").attr("id") == "humidity") {
+          // document.querySelector("#humidity").innerHTML += `
+          // <div>
+          //   ${element.key}
+          //   ${element.val()[0]}
+          //   ${element.val()[1]}
+          //   ${element.val()[2]}
+          //   ${element.val()[3]}
+          //   ${element.val()[4]}
+          //   </div>
+          // `;
+          // }
+        });
+      });
+      window.setTimeout(function () {
+        window.location.reload();
+      }, 20000);
+    </script>
+  </body>
+</html>
