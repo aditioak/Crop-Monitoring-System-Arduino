@@ -1,0 +1,18 @@
+humidity
+Temp(degree C)
+Temp(degree F)
+Heat index(degree C)
+Heat index(degree F)
+Photodiode value(0 to 1023)
+Soil moisture sensor(0 to 1023)
+
+var firebaseConfig = {
+        apiKey: "AIzaSyDC5AZSHQJM3YDaV6VOodzTRgvnQmcY9_A",
+  authDomain: "plantmonitoringsystem-da869.firebaseapp.com",
+  databaseURL: "https://plantmonitoringsystem-da869-default-rtdb.firebaseio.com",
+  projectId: "plantmonitoringsystem-da869",
+  storageBucket: "plantmonitoringsystem-da869.appspot.com",
+  messagingSenderId: "668705677260",
+  appId: "1:668705677260:web:42ab4af44ace369a7b0769",
+  measurementId: "G-7CYNHMYCTK"
+      };
